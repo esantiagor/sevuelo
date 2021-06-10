@@ -33,6 +33,12 @@ public class RequestResource {
         return requestRepository.save(request);
     }
 
+    @PostMapping("/delete-request")
+    public void deleteRequest(@RequestBody Request request) {
+        log.debug("REST request to delete Request : {}", request);
+        requestRepository.delete(request);
+    }
+
     @GetMapping("/requests")
     public List<Request> getAllRequests() {
         log.debug("REST request to get all Requests");
@@ -50,6 +56,13 @@ public class RequestResource {
     public void reserve(@RequestBody Request request) {
         log.debug("REST request to reserve a flight");
         request.setStatus(RequestStatus.RESERVED);
+        requestRepository.save(request);
+    }
+
+    @PutMapping("/undo-reserve")
+    public void undoReserve(@RequestBody Request request) {
+        log.debug("REST request to reserve a flight");
+        request.setStatus(RequestStatus.NEW);
         requestRepository.save(request);
     }
 

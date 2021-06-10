@@ -36,6 +36,11 @@ public class Request implements Serializable {
     @Column(name = "status", nullable = false)
     private RequestStatus status;
 
+    // @NotNullxz
+    @Size(max = 100)
+    @Column(name = "observation", length = 100, nullable = true)
+    private String observation;
+
     public Long getId() {
         return id;
     }
@@ -58,6 +63,14 @@ public class Request implements Serializable {
 
     public void setDestination(String destination) {
         this.destination = destination;
+    }
+
+    public String getObservation() {
+        return this.observation;
+    }
+
+    public void setObservation(String observation) {
+        this.observation = observation;
     }
 
     public RequestStatus getStatus() {
